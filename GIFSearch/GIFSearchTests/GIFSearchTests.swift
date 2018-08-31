@@ -11,11 +11,83 @@ import XCTest
 
 class GIFSearchTests: XCTestCase {
     
+    var viewModel: ViewModel?
+    var parseJSON: ParseJSON?
+    
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        
+       self.viewModel = ViewModel()
+        self.parseJSON = ParseJSON()
     }
     
+    
+    func checkCountArrayData () {
+        let trandigUrl = "http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC"
+        let array = self.parseJSON?.arrayData
+        self.parseJSON?.pasreWithUrl(urlName: trandigUrl, complition: { (array) in
+        })
+        XCTAssertTrue(array?.count != 0)
+    }
+    
+    func checkCaseRaiting () {
+        let trandigUrl = "http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC"
+        let array = self.parseJSON?.arrayData
+        self.parseJSON?.pasreWithUrl(urlName: trandigUrl, complition: { (array) in
+        })
+        
+        for dict in array! {
+            let value = dict["rating"]
+            XCTAssertTrue(value != nil)
+        }
+    }
+    
+    func checkCaseImport_datetime () {
+        let trandigUrl = "http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC"
+        let array = self.parseJSON?.arrayData
+        self.parseJSON?.pasreWithUrl(urlName: trandigUrl, complition: { (array) in
+        })
+        
+        for dict in array! {
+            let value = dict["import_datetime"]
+            XCTAssertTrue(value != nil)
+        }
+    }
+    
+    func checkCaseTrending_datetime () {
+        let trandigUrl = "http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC"
+        let array = self.parseJSON?.arrayData
+        self.parseJSON?.pasreWithUrl(urlName: trandigUrl, complition: { (array) in
+        })
+        
+        for dict in array! {
+            let value = dict["trending_datetime"]
+            XCTAssertTrue(value != nil)
+        }
+    }
+    
+    func checkCasePreview_gif () {
+        let trandigUrl = "http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC"
+        let array = self.parseJSON?.arrayData
+        self.parseJSON?.pasreWithUrl(urlName: trandigUrl, complition: { (array) in
+        })
+        
+        for dict in array! {
+            let value = dict["preview_gif"]
+            XCTAssertTrue(value != nil)
+        }
+    }
+    func checkCaseOriginal () {
+        let trandigUrl = "http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC"
+        let array = self.parseJSON?.arrayData
+        self.parseJSON?.pasreWithUrl(urlName: trandigUrl, complition: { (array) in
+        })
+        
+        for dict in array! {
+            let value = dict["original"]
+            XCTAssertTrue(value != nil)
+        }
+    }
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()

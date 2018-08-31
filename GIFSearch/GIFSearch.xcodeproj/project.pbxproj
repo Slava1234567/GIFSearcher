@@ -8,13 +8,27 @@
 
 /* Begin PBXBuildFile section */
 		CC182967212D8BCA006802EA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC182966212D8BCA006802EA /* AppDelegate.swift */; };
-		CC182969212D8BCA006802EA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC182968212D8BCA006802EA /* ViewController.swift */; };
 		CC18296C212D8BCA006802EA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC18296A212D8BCA006802EA /* Main.storyboard */; };
 		CC18296F212D8BCA006802EA /* GIFSearch.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CC18296D212D8BCA006802EA /* GIFSearch.xcdatamodeld */; };
 		CC182971212D8BCB006802EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC182970212D8BCB006802EA /* Assets.xcassets */; };
 		CC182974212D8BCB006802EA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC182972212D8BCB006802EA /* LaunchScreen.storyboard */; };
 		CC18297F212D8BCB006802EA /* GIFSearchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC18297E212D8BCB006802EA /* GIFSearchTests.swift */; };
 		CC18298A212D8C10006802EA /* ParseJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC182989212D8C10006802EA /* ParseJSON.swift */; };
+		F90688D821368A0100789117 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90688D721368A0100789117 /* DetailViewController.swift */; };
+		F90688DC213751F900789117 /* SFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90688DB213751F900789117 /* SFileManager.swift */; };
+		F907CE3D2137DD5500020291 /* SaveTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F907CE3C2137DD5500020291 /* SaveTableViewController.swift */; };
+		F907CE402137DE6100020291 /* Gifs+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F907CE3E2137DE6100020291 /* Gifs+CoreDataClass.swift */; };
+		F907CE412137DE6100020291 /* Gifs+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F907CE3F2137DE6100020291 /* Gifs+CoreDataProperties.swift */; };
+		F907CE472138250C00020291 /* SaveCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F907CE462138250C00020291 /* SaveCollectionViewController.swift */; };
+		F907CE49213825C800020291 /* SaveCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F907CE48213825C800020291 /* SaveCollectionViewCell.swift */; };
+		F907CE4D21382E0800020291 /* DownLoadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F907CE4C21382E0800020291 /* DownLoadManager.m */; };
+		F90A42F72134B1AA00D8FDE4 /* SearchCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90A42F62134B1AA00D8FDE4 /* SearchCollectionViewController.swift */; };
+		F911CF7821353F96004DD37A /* SearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F911CF7721353F96004DD37A /* SearchCollectionViewCell.swift */; };
+		F96A34D3212EBB9C00F2B60F /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = F96A34D2212EBB9C00F2B60F /* Model.swift */; };
+		F96A34D5212EC63B00F2B60F /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F96A34D4212EC63B00F2B60F /* ViewModel.swift */; };
+		F96A34D7212ECED000F2B60F /* MainScreanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F96A34D6212ECED000F2B60F /* MainScreanViewController.swift */; };
+		F96A34D9212EF45B00F2B60F /* MainCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F96A34D8212EF45B00F2B60F /* MainCollectionViewCell.swift */; };
+		F96A34DB212F007100F2B60F /* PlayGif.swift in Sources */ = {isa = PBXBuildFile; fileRef = F96A34DA212F007100F2B60F /* PlayGif.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,7 +44,6 @@
 /* Begin PBXFileReference section */
 		CC182963212D8BCA006802EA /* GIFSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GIFSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC182966212D8BCA006802EA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		CC182968212D8BCA006802EA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		CC18296B212D8BCA006802EA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CC18296E212D8BCA006802EA /* GIFSearch.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GIFSearch.xcdatamodel; sourceTree = "<group>"; };
 		CC182970212D8BCB006802EA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -40,6 +53,23 @@
 		CC18297E212D8BCB006802EA /* GIFSearchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GIFSearchTests.swift; sourceTree = "<group>"; };
 		CC182980212D8BCB006802EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CC182989212D8C10006802EA /* ParseJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseJSON.swift; sourceTree = "<group>"; };
+		F90688D721368A0100789117 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		F90688DB213751F900789117 /* SFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFileManager.swift; sourceTree = "<group>"; };
+		F907CE3C2137DD5500020291 /* SaveTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveTableViewController.swift; sourceTree = "<group>"; };
+		F907CE3E2137DE6100020291 /* Gifs+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Gifs+CoreDataClass.swift"; sourceTree = "<group>"; };
+		F907CE3F2137DE6100020291 /* Gifs+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Gifs+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		F907CE462138250C00020291 /* SaveCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveCollectionViewController.swift; sourceTree = "<group>"; };
+		F907CE48213825C800020291 /* SaveCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveCollectionViewCell.swift; sourceTree = "<group>"; };
+		F907CE4A21382E0800020291 /* GIFSearch-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GIFSearch-Bridging-Header.h"; sourceTree = "<group>"; };
+		F907CE4B21382E0800020291 /* DownLoadManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DownLoadManager.h; sourceTree = "<group>"; };
+		F907CE4C21382E0800020291 /* DownLoadManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DownLoadManager.m; sourceTree = "<group>"; };
+		F90A42F62134B1AA00D8FDE4 /* SearchCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewController.swift; sourceTree = "<group>"; };
+		F911CF7721353F96004DD37A /* SearchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewCell.swift; sourceTree = "<group>"; };
+		F96A34D2212EBB9C00F2B60F /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		F96A34D4212EC63B00F2B60F /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		F96A34D6212ECED000F2B60F /* MainScreanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreanViewController.swift; sourceTree = "<group>"; };
+		F96A34D8212EF45B00F2B60F /* MainCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewCell.swift; sourceTree = "<group>"; };
+		F96A34DA212F007100F2B60F /* PlayGif.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayGif.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +93,8 @@
 		CC18295A212D8BCA006802EA = {
 			isa = PBXGroup;
 			children = (
+				F907CE3E2137DE6100020291 /* Gifs+CoreDataClass.swift */,
+				F907CE3F2137DE6100020291 /* Gifs+CoreDataProperties.swift */,
 				CC182965212D8BCA006802EA /* GIFSearch */,
 				CC18297D212D8BCB006802EA /* GIFSearchTests */,
 				CC182964212D8BCA006802EA /* Products */,
@@ -82,13 +114,19 @@
 			isa = PBXGroup;
 			children = (
 				CC182966212D8BCA006802EA /* AppDelegate.swift */,
-				CC182968212D8BCA006802EA /* ViewController.swift */,
-				CC182989212D8C10006802EA /* ParseJSON.swift */,
+				F90BD1472139708D0083DA75 /* ParseJSON */,
+				F90BD148213970AD0083DA75 /* ViewModel */,
+				F90BD145213970040083DA75 /* Controllers */,
+				F90BD146213970550083DA75 /* Cells */,
+				F90BD14A213970F60083DA75 /* Managers */,
+				F90BD14B213971600083DA75 /* PlayGIF */,
+				F90BD149213970D50083DA75 /* Model */,
 				CC18296A212D8BCA006802EA /* Main.storyboard */,
 				CC182970212D8BCB006802EA /* Assets.xcassets */,
 				CC182972212D8BCB006802EA /* LaunchScreen.storyboard */,
 				CC182975212D8BCB006802EA /* Info.plist */,
 				CC18296D212D8BCA006802EA /* GIFSearch.xcdatamodeld */,
+				F907CE4A21382E0800020291 /* GIFSearch-Bridging-Header.h */,
 			);
 			path = GIFSearch;
 			sourceTree = "<group>";
@@ -100,6 +138,70 @@
 				CC182980212D8BCB006802EA /* Info.plist */,
 			);
 			path = GIFSearchTests;
+			sourceTree = "<group>";
+		};
+		F90BD145213970040083DA75 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				F96A34D6212ECED000F2B60F /* MainScreanViewController.swift */,
+				F90688D721368A0100789117 /* DetailViewController.swift */,
+				F90A42F62134B1AA00D8FDE4 /* SearchCollectionViewController.swift */,
+				F907CE3C2137DD5500020291 /* SaveTableViewController.swift */,
+				F907CE462138250C00020291 /* SaveCollectionViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		F90BD146213970550083DA75 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				F96A34D8212EF45B00F2B60F /* MainCollectionViewCell.swift */,
+				F911CF7721353F96004DD37A /* SearchCollectionViewCell.swift */,
+				F907CE48213825C800020291 /* SaveCollectionViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		F90BD1472139708D0083DA75 /* ParseJSON */ = {
+			isa = PBXGroup;
+			children = (
+				CC182989212D8C10006802EA /* ParseJSON.swift */,
+			);
+			path = ParseJSON;
+			sourceTree = "<group>";
+		};
+		F90BD148213970AD0083DA75 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				F96A34D4212EC63B00F2B60F /* ViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		F90BD149213970D50083DA75 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F96A34D2212EBB9C00F2B60F /* Model.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		F90BD14A213970F60083DA75 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				F90688DB213751F900789117 /* SFileManager.swift */,
+				F907CE4B21382E0800020291 /* DownLoadManager.h */,
+				F907CE4C21382E0800020291 /* DownLoadManager.m */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		F90BD14B213971600083DA75 /* PlayGIF */ = {
+			isa = PBXGroup;
+			children = (
+				F96A34DA212F007100F2B60F /* PlayGif.swift */,
+			);
+			path = PlayGIF;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -152,6 +254,7 @@
 				TargetAttributes = {
 					CC182962212D8BCA006802EA = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 0940;
 					};
 					CC182979212D8BCB006802EA = {
 						CreatedOnToolsVersion = 9.4.1;
@@ -203,10 +306,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CC182969212D8BCA006802EA /* ViewController.swift in Sources */,
+				F907CE402137DE6100020291 /* Gifs+CoreDataClass.swift in Sources */,
+				F907CE49213825C800020291 /* SaveCollectionViewCell.swift in Sources */,
+				F907CE3D2137DD5500020291 /* SaveTableViewController.swift in Sources */,
+				F907CE4D21382E0800020291 /* DownLoadManager.m in Sources */,
+				F90688D821368A0100789117 /* DetailViewController.swift in Sources */,
+				F90A42F72134B1AA00D8FDE4 /* SearchCollectionViewController.swift in Sources */,
+				F911CF7821353F96004DD37A /* SearchCollectionViewCell.swift in Sources */,
+				F96A34D9212EF45B00F2B60F /* MainCollectionViewCell.swift in Sources */,
+				F96A34D7212ECED000F2B60F /* MainScreanViewController.swift in Sources */,
+				F96A34DB212F007100F2B60F /* PlayGif.swift in Sources */,
 				CC182967212D8BCA006802EA /* AppDelegate.swift in Sources */,
+				F96A34D3212EBB9C00F2B60F /* Model.swift in Sources */,
+				F907CE472138250C00020291 /* SaveCollectionViewController.swift in Sources */,
 				CC18296F212D8BCA006802EA /* GIFSearch.xcdatamodeld in Sources */,
+				F90688DC213751F900789117 /* SFileManager.swift in Sources */,
 				CC18298A212D8C10006802EA /* ParseJSON.swift in Sources */,
+				F96A34D5212EC63B00F2B60F /* ViewModel.swift in Sources */,
+				F907CE412137DE6100020291 /* Gifs+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -366,6 +483,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = GIFSearch/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -374,6 +492,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = viachaslauShyla.GIFSearch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "GIFSearch/GIFSearch-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -383,6 +503,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = GIFSearch/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -391,6 +512,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = viachaslauShyla.GIFSearch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "GIFSearch/GIFSearch-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
