@@ -17,7 +17,7 @@ class GIFSearchTests: XCTestCase {
     override func setUp() {
         super.setUp()
         
-       self.viewModel = ViewModel()
+        self.viewModel = ViewModel()
         self.parseJSON = ParseJSON()
     }
     

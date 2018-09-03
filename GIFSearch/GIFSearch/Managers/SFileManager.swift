@@ -21,6 +21,17 @@ class SFileManager {
         if !(fileManager .fileExists(atPath: path)) {
             fileManager.createFile(atPath: path, contents: data, attributes: nil)
         }
+        
+        print("PATH ___ \(path)")
         return path
+    }
+    
+    func deletePath(path:String) {
+        let fileManager = FileManager.default
+        
+        if fileManager.fileExists(atPath: path) {
+           try? fileManager.removeItem(atPath: path)
+        }
+        
     }
 }

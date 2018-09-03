@@ -8,10 +8,10 @@
 
 import UIKit
 
-class MainScreanViewController: UIViewController,UICollectionViewDataSource,UICollectionViewDelegate, UISearchBarDelegate {
+class MainScreanViewController: UIViewController,UICollectionViewDataSource,UICollectionViewDelegate, UISearchBarDelegate,UICollectionViewDelegateFlowLayout {
     
-    let trandigUrl = "http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC"
-    let searchUrl = "http://api.giphy.com/v1/gifs/search?q=Name&api_key=dc6zaTOxFJmzC"
+   // let trandigUrl = "http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC"
+   // let searchUrl = "http://api.giphy.com/v1/gifs/search?q=Name&api_key=dc6zaTOxFJmzC"
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var collectionView: UICollectionView!
@@ -31,7 +31,6 @@ class MainScreanViewController: UIViewController,UICollectionViewDataSource,UICo
     }
     var arrayImages = [UIImage]() {
         didSet {
-            print(self.arrayImages.count)
             self.collectionView.reloadData()
         }
     }
@@ -51,11 +50,26 @@ class MainScreanViewController: UIViewController,UICollectionViewDataSource,UICo
         })
     }
     
+    override func viewWillLayoutSubviews() {
+        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+            let widht = self.view.frame.size.width / 2 - 7.5
+            let hight = max(self.view.frame.size.width / 5, self.view.frame.size.height / 5)
+            return CGSize(width: widht, height: hight)
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        self.logoView.image = UIImage(named: "1")
+        self.logoView.contentMode = .scaleToFill
+        
         self.buttonAll.layer.cornerRadius = 5
         self.buttonAll.layer.masksToBounds = true
+        self.buttonAll.layer.borderColor = UIColor.white.cgColor
+        self.buttonAll.layer.borderWidth = 1
+       // self.buttonAll.bounds.size.width = self.view.frame.size.width / 5
         
         self.view.backgroundColor = UIColor.black
         self.collectionView.backgroundColor = UIColor.black
@@ -65,7 +79,7 @@ class MainScreanViewController: UIViewController,UICollectionViewDataSource,UICo
         self.searchBar.delegate = self
         
         self.viewModel = ViewModel()
-        self.viewModel?.getDataOfModel(url: self.trandigUrl, offset: index, complition: { (urls) in
+        self.viewModel?.getDataOfModel(url: ConstantUrl.trandigUrl, offset: index, complition: { (urls) in
             self.arrayPreviewUrl = urls
             self.collectionView.reloadData()
         })
@@ -93,13 +107,14 @@ class MainScreanViewController: UIViewController,UICollectionViewDataSource,UICo
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if indexPath.row == self.index - 20 {
-            self.viewModel?.getDataOfModel(url: self.trandigUrl, offset: self.index, complition: { (newPreviewUrls) in
+            self.viewModel?.getDataOfModel(url: ConstantUrl.trandigUrl, offset: self.index, complition: { (newPreviewUrls) in
                 self.arrayPreviewUrl = newPreviewUrls
             })
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)  {
+        guard self.arrayImages.count > 0 else {return}
         let detailVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController
         let nvc = UINavigationController(rootViewController: detailVC!)
         detailVC?.detailData = self.viewModel?.getDataForDetail(url: self.urls[indexPath.row])
@@ -109,8 +124,13 @@ class MainScreanViewController: UIViewController,UICollectionViewDataSource,UICo
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard searchBar.text != nil else {return}
-        
-        let newSearchUrl = self.searchUrl.replacingOccurrences(of: "Name", with: searchBar.text! )
+        var search = searchBar.text
+        if let newSearch = search?.components(separatedBy: " ") {
+            if newSearch.count == 2 {
+            search = newSearch[0] + newSearch[1]
+            }
+        }
+        let newSearchUrl = ConstantUrl.searchUrl.replacingOccurrences(of: "Name", with: search! )
         let searchVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SearchCollectionViewController") as? SearchCollectionViewController
         let nvc = UINavigationController(rootViewController: searchVC!)
         
@@ -118,7 +138,18 @@ class MainScreanViewController: UIViewController,UICollectionViewDataSource,UICo
         searchVC?.searchName = newSearchUrl
         self.present(nvc, animated: true, completion: nil)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        let widht = self.view.frame.size.width / 2 - 7.5
+        let hight = max(self.view.frame.size.width / 5, self.view.frame.size.height / 5)   //self.view.frame.size.height / 5 
+        
+        return CGSize(width: widht, height: CGFloat(hight))
+    }
 }
+
+
+
 
 extension UIColor {
     class func customColor() -> UIColor {

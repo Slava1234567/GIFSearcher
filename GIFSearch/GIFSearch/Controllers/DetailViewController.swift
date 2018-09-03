@@ -17,6 +17,9 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var date: UILabel!
     var detailData : DetailData?
     
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -30,6 +33,11 @@ class DetailViewController: UIViewController {
         
         self.titleImage.text = self.detailData?.title
         self.date.text = self.detailData?.date
+        if let size =  Int((self.detailData?.size)!) {
+            let newSize = size / 1000
+            self.size.text = String(newSize) + "kb"
+        }
+        
         self.imageView.backgroundColor = UIColor.gray
         self.activityIndicator.startAnimating()
         
@@ -54,7 +62,7 @@ class DetailViewController: UIViewController {
         
         let saveVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SaveCollectionViewController") as? SaveCollectionViewController
         saveVC?.path = path
-        
+       
         self.navigationController?.pushViewController(saveVC!, animated: true)
     }
     

@@ -15,13 +15,14 @@ class SaveCollectionViewController: UICollectionViewController {
     var context : NSManagedObjectContext!
     var path: String?
     var arrayGifs = [Gifs]()
+   // var detailData :DetailData?
     
     func saveGifs() {
         let gifs = self.getGifts()
         
         let entity = NSEntityDescription.entity(forEntityName: "Gifs", in: self.context)
         let gif = NSManagedObject(entity: entity!, insertInto: self.context) as? Gifs
-        guard path != nil else {return}
+        guard self.path != nil else {return}
         guard !gifs.contains(where: { (gif) -> Bool in
             gif.ulr == path
         }) else { return }
@@ -51,13 +52,12 @@ class SaveCollectionViewController: UICollectionViewController {
             let path = gif.ulr
             DispatchQueue.global(qos: .userInitiated).async {
                 guard path != nil else {return}
+                
                 let image = UIImage(contentsOfFile: path!)
                 DispatchQueue.main.async {
                     guard image != nil else {return}
                     self.images.append(image!)
                     self.collectionView?.reloadData()
-                    print(self.images.count)
-                    print(gifs)
                 }
             }
         }
@@ -68,8 +68,25 @@ class SaveCollectionViewController: UICollectionViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
+    @objc func deleteAllAction() {
+        let gifs = self.getGifts()
+        
+        for gif in gifs {
+            self.context.delete(gif)
+        }
+       try? self.context.save()
+        self.images = []
+        self.collectionView?.reloadData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.collectionView?.reloadData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         
         self.title = "My Gifs"
         self.collectionView?.backgroundColor = UIColor.lightGray
@@ -77,12 +94,15 @@ class SaveCollectionViewController: UICollectionViewController {
         let backButton = UIBarButtonItem(title: "< back", style: UIBarButtonItemStyle.plain, target: self, action: #selector(clickBack))
         self.navigationItem.setLeftBarButton(backButton, animated: true)
         
+        let deleteAll = UIBarButtonItem(title: "Delete All", style: UIBarButtonItemStyle.plain, target: self, action: #selector(deleteAllAction))
+        self.navigationItem.setRightBarButton(deleteAll, animated: true)
+        
         let appDelegate = UIApplication.shared.delegate as? AppDelegate
         self.context = appDelegate?.persistentContainer.viewContext
         
         self.saveGifs()
-        let gifs = self.getGifts()
-        self.getUIImage(gifs: gifs)
+        self.arrayGifs = self.getGifts()
+        self.getUIImage(gifs: self.arrayGifs)
     }
     
     // MARK: UICollectionViewDataSource
@@ -94,7 +114,39 @@ class SaveCollectionViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SaveCollectionViewCell", for: indexPath) as? SaveCollectionViewCell
         cell?.imageView.image = self.images[indexPath.row]
+        cell?.layer.borderColor = UIColor.customColor().cgColor
+        cell?.layer.borderWidth = 1
+        cell?.layer.cornerRadius = 5
+        cell?.layer.masksToBounds = true
         
         return cell!
     }
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MyDetailViewController") as? MyDetailViewController
+       
+        vc?.image = self.images[indexPath.row]
+        vc?.path = self.arrayGifs[indexPath.row].ulr
+        vc?.delClouse = { [weak self] path in
+            for (index,gif) in (self?.arrayGifs)!.enumerated() {
+                if gif.ulr == path {
+                    self?.context.delete(gif)
+                    self?.images.remove(at: index)
+                    self?.collectionView?.reloadData()
+                }
+            }
+        }
+        self.navigationController?.pushViewController(vc!, animated: true)
+        
+    }
+    
 }
+
+
+
+
+
+
+
+
+

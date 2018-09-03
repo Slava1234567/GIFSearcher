@@ -22,6 +22,20 @@ extension UIImage {
         return UIImage.animatedImageWithSource(source)
     }
     
+    public class func gifImageWithName(_ name: String) -> UIImage? {
+        guard let bundleURL = Bundle.main
+            .url(forResource: name, withExtension: "gif") else {
+                
+                return nil
+        }
+        guard let imageData = try? Data(contentsOf: bundleURL) else {
+            
+            return nil
+        }
+        
+        return gifImageWithData(imageData)
+    }
+    
     class func delayForImageAtIndex(_ index: Int, source: CGImageSource!) -> Double {
         var delay = 0.1
         

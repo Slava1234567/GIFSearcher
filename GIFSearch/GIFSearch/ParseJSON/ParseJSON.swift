@@ -23,11 +23,17 @@ class ParseJSON {
                     if let value = newDict["url"] as? String {
                         dictiary1["preview_url"] = value
                     }
+                    if let value1 = newDict["height"] as? String {
+                        dictiary1["height"] = value1
+                    }
                 }
             case "original":
                 if let newDict = dict["original"] as? [String:Any] {
                     if let value = newDict["url"] as? String {
                         dictiary1["original_url"] = value
+                    }
+                    if let value1 = newDict["size"] as? String {
+                        dictiary1["size"] = value1
                     }
                 }
             default: break
