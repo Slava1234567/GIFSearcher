@@ -22,10 +22,10 @@ struct DetailData {
     let size: String
 }
 
-struct CreateImage {
-    let image: UIImage
-    let url: String
-}
+//struct CreateImage {
+//    let image: UIImage
+//    let url: String
+//}
 
 class ViewModel {
     

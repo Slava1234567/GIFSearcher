@@ -40,11 +40,11 @@ class DetailViewController: UIViewController {
     func downloadImage(url: String?) {
          guard url != nil else {return}
         let downloadManager = DownLoadManager()
-        downloadManager.resumeDownloadPreviewGit((self.detailData?.url)!) { (data) in
+        downloadManager.resumeDownloadPreviewGit((self.detailData?.url)!) { [weak self] (data) in
             let image = UIImage.gifImageWithData(data!)
-            self.imageView.image = image
-            self.activityIndicator.stopAnimating()
-            self.activityIndicator.hidesWhenStopped = true
+            self?.imageView.image = image
+            self?.activityIndicator.stopAnimating()
+            self?.activityIndicator.hidesWhenStopped = true
         }
     }
     

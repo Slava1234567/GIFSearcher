@@ -23,9 +23,9 @@ class MainScreanViewController: UIViewController,UICollectionViewDataSource,UICo
     var arrayPreviewUrl = [String]() {
         didSet {
             index = self.arrayPreviewUrl.count
-            self.viewModel?.createUIImage(complition: { (image, url) in
-                self.arrayImages.append(image)
-                self.urls.append(url)
+            self.viewModel?.createUIImage(complition: {[weak self] (image, url) in
+                self?.arrayImages.append(image)
+                self?.urls.append(url)
             })
         }
     }
@@ -68,9 +68,9 @@ class MainScreanViewController: UIViewController,UICollectionViewDataSource,UICo
         self.searchBar.delegate = self
         
         self.viewModel = ViewModel()
-        self.viewModel?.getDataOfModel(url: ConstantUrl.trandigUrl, offset: index, complition: { (urls) in
-            self.arrayPreviewUrl = urls
-            self.collectionView.reloadData()
+        self.viewModel?.getDataOfModel(url: ConstantUrl.trandigUrl, offset: index, complition: {[weak self] (urls) in
+            self?.arrayPreviewUrl = urls
+          //  self?.collectionView.reloadData()
         })
     }
     
@@ -96,8 +96,8 @@ class MainScreanViewController: UIViewController,UICollectionViewDataSource,UICo
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if indexPath.row == self.index - 20 {
-            self.viewModel?.getDataOfModel(url: ConstantUrl.trandigUrl, offset: self.index, complition: { (newPreviewUrls) in
-                self.arrayPreviewUrl = newPreviewUrls
+            self.viewModel?.getDataOfModel(url: ConstantUrl.trandigUrl, offset: self.index, complition: { [weak self] (newPreviewUrls) in
+                self?.arrayPreviewUrl = newPreviewUrls
             })
         }
     }
@@ -111,10 +111,7 @@ class MainScreanViewController: UIViewController,UICollectionViewDataSource,UICo
         self.present(nvc, animated: true, completion: nil)
     }
     
-    
-    
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-
         let newSearchUrl = self.viewModel?.getSearchUrl(text: searchBar.text)
         let searchVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SearchCollectionViewController") as? SearchCollectionViewController
         let nvc = UINavigationController(rootViewController: searchVC!)

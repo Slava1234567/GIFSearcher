@@ -37,7 +37,6 @@ class SaveCollectionViewController: UICollectionViewController {
     func getGifts() -> [Gifs] {
         var gifs = [Gifs]()
         let fetchRequest : NSFetchRequest<Gifs> = Gifs.fetchRequest()
-        
         do{
             gifs = try self.context.fetch(fetchRequest)
         } catch {
@@ -47,7 +46,6 @@ class SaveCollectionViewController: UICollectionViewController {
     }
     
     func getUIImage(gifs: [Gifs]) {
-        
         for gif in gifs {
             let path = gif.ulr
             DispatchQueue.global(qos: .userInitiated).async {
@@ -90,12 +88,9 @@ class SaveCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        
         self.title = "My Gifs"
         self.collectionView?.backgroundColor = UIColor.lightGray
         self.addBarButtonItem()
-        
         
         let appDelegate = UIApplication.shared.delegate as? AppDelegate
         self.context = appDelegate?.persistentContainer.viewContext

@@ -54,9 +54,9 @@ class SearchCollectionViewController: UICollectionViewController,UICollectionVie
         self.viewModel?.downloadRaitingImage(complition: { (data) in
             self.ratingImage = UIImage.gifImageWithData(data)
         })
-        self.viewModel?.getDataOfModel(url: self.searchName!, offset: index, complition: { (urls) in
-            self.previewUrls = urls
-            self.collectionView?.reloadData()
+        self.viewModel?.getDataOfModel(url: self.searchName!, offset: index, complition: {[weak self] (urls) in
+            self?.previewUrls = urls
+            self?.collectionView?.reloadData()
         })
         let backButton = UIBarButtonItem(title: "< Back", style: UIBarButtonItemStyle.plain, target: self, action: #selector(clickBackButton))
         self.navigationItem.setLeftBarButton(backButton, animated: true)
@@ -102,8 +102,8 @@ class SearchCollectionViewController: UICollectionViewController,UICollectionVie
     
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if indexPath.row == self.index - 1 {
-            self.viewModel?.getDataOfModel(url: self.searchName!, offset: self.index, complition: { (newPreviewUrls) in
-                self.previewUrls = newPreviewUrls
+            self.viewModel?.getDataOfModel(url: self.searchName!, offset: self.index, complition: {[weak self] (newPreviewUrls) in
+                self?.previewUrls = newPreviewUrls
             })
         }
     }
