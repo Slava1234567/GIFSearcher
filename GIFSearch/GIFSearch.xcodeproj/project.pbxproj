@@ -15,7 +15,6 @@
 		CC18297F212D8BCB006802EA /* GIFSearchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC18297E212D8BCB006802EA /* GIFSearchTests.swift */; };
 		CC18298A212D8C10006802EA /* ParseJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC182989212D8C10006802EA /* ParseJSON.swift */; };
 		F90688D821368A0100789117 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90688D721368A0100789117 /* DetailViewController.swift */; };
-		F90688DC213751F900789117 /* SFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90688DB213751F900789117 /* SFileManager.swift */; };
 		F907CE402137DE6100020291 /* Gifs+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F907CE3E2137DE6100020291 /* Gifs+CoreDataClass.swift */; };
 		F907CE412137DE6100020291 /* Gifs+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F907CE3F2137DE6100020291 /* Gifs+CoreDataProperties.swift */; };
 		F907CE472138250C00020291 /* SaveCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F907CE462138250C00020291 /* SaveCollectionViewController.swift */; };
@@ -23,7 +22,6 @@
 		F907CE4D21382E0800020291 /* DownLoadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F907CE4C21382E0800020291 /* DownLoadManager.m */; };
 		F9099B71213D251300DCF51C /* MyDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9099B70213D251300DCF51C /* MyDetailViewController.swift */; };
 		F9099B74213D781D00DCF51C /* MyFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F9099B73213D781D00DCF51C /* MyFileManager.m */; };
-		F9099B76213D7D5F00DCF51C /* NewUnitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9099B75213D7D5F00DCF51C /* NewUnitTest.swift */; };
 		F90A42F72134B1AA00D8FDE4 /* SearchCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90A42F62134B1AA00D8FDE4 /* SearchCollectionViewController.swift */; };
 		F911CF7821353F96004DD37A /* SearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F911CF7721353F96004DD37A /* SearchCollectionViewCell.swift */; };
 		F96A34D3212EBB9C00F2B60F /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = F96A34D2212EBB9C00F2B60F /* Model.swift */; };
@@ -56,7 +54,6 @@
 		CC182980212D8BCB006802EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CC182989212D8C10006802EA /* ParseJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseJSON.swift; sourceTree = "<group>"; };
 		F90688D721368A0100789117 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
-		F90688DB213751F900789117 /* SFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFileManager.swift; sourceTree = "<group>"; };
 		F907CE3E2137DE6100020291 /* Gifs+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Gifs+CoreDataClass.swift"; sourceTree = "<group>"; };
 		F907CE3F2137DE6100020291 /* Gifs+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Gifs+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		F907CE462138250C00020291 /* SaveCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveCollectionViewController.swift; sourceTree = "<group>"; };
@@ -67,7 +64,6 @@
 		F9099B70213D251300DCF51C /* MyDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDetailViewController.swift; sourceTree = "<group>"; };
 		F9099B72213D781D00DCF51C /* MyFileManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyFileManager.h; sourceTree = "<group>"; };
 		F9099B73213D781D00DCF51C /* MyFileManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyFileManager.m; sourceTree = "<group>"; };
-		F9099B75213D7D5F00DCF51C /* NewUnitTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewUnitTest.swift; sourceTree = "<group>"; };
 		F90A42F62134B1AA00D8FDE4 /* SearchCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewController.swift; sourceTree = "<group>"; };
 		F911CF7721353F96004DD37A /* SearchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewCell.swift; sourceTree = "<group>"; };
 		F96A34D2212EBB9C00F2B60F /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
@@ -141,7 +137,6 @@
 			children = (
 				CC18297E212D8BCB006802EA /* GIFSearchTests.swift */,
 				CC182980212D8BCB006802EA /* Info.plist */,
-				F9099B75213D7D5F00DCF51C /* NewUnitTest.swift */,
 			);
 			path = GIFSearchTests;
 			sourceTree = "<group>";
@@ -195,7 +190,6 @@
 		F90BD14A213970F60083DA75 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				F90688DB213751F900789117 /* SFileManager.swift */,
 				F9099B72213D781D00DCF51C /* MyFileManager.h */,
 				F9099B73213D781D00DCF51C /* MyFileManager.m */,
 				F907CE4B21382E0800020291 /* DownLoadManager.h */,
@@ -328,7 +322,6 @@
 				F96A34D3212EBB9C00F2B60F /* Model.swift in Sources */,
 				F907CE472138250C00020291 /* SaveCollectionViewController.swift in Sources */,
 				CC18296F212D8BCA006802EA /* GIFSearch.xcdatamodeld in Sources */,
-				F90688DC213751F900789117 /* SFileManager.swift in Sources */,
 				CC18298A212D8C10006802EA /* ParseJSON.swift in Sources */,
 				F96A34D5212EC63B00F2B60F /* ViewModel.swift in Sources */,
 				F907CE412137DE6100020291 /* Gifs+CoreDataProperties.swift in Sources */,
@@ -340,7 +333,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F9099B76213D7D5F00DCF51C /* NewUnitTest.swift in Sources */,
 				CC18297F212D8BCB006802EA /* GIFSearchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

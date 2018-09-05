@@ -15,8 +15,8 @@ class SaveCollectionViewController: UICollectionViewController {
     var context : NSManagedObjectContext!
     var path: String?
     var arrayGifs = [Gifs]()
-   // var detailData :DetailData?
     
+    //MARK: - Funcs
     func saveGifs() {
         let gifs = self.getGifts()
         
@@ -63,7 +63,7 @@ class SaveCollectionViewController: UICollectionViewController {
         }
     }
     
-    
+    //MARK: - Actions
     @objc func clickBack() {
         self.dismiss(animated: true, completion: nil)
     }
@@ -79,8 +79,12 @@ class SaveCollectionViewController: UICollectionViewController {
         self.collectionView?.reloadData()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        self.collectionView?.reloadData()
+    func addBarButtonItem() {
+        let backButton = UIBarButtonItem(title: "< back", style: UIBarButtonItemStyle.plain, target: self, action: #selector(clickBack))
+        self.navigationItem.setLeftBarButton(backButton, animated: true)
+        
+        let deleteAll = UIBarButtonItem(title: "Delete All", style: UIBarButtonItemStyle.plain, target: self, action: #selector(deleteAllAction))
+        self.navigationItem.setRightBarButton(deleteAll, animated: true)
     }
     
     override func viewDidLoad() {
@@ -90,12 +94,8 @@ class SaveCollectionViewController: UICollectionViewController {
         
         self.title = "My Gifs"
         self.collectionView?.backgroundColor = UIColor.lightGray
+        self.addBarButtonItem()
         
-        let backButton = UIBarButtonItem(title: "< back", style: UIBarButtonItemStyle.plain, target: self, action: #selector(clickBack))
-        self.navigationItem.setLeftBarButton(backButton, animated: true)
-        
-        let deleteAll = UIBarButtonItem(title: "Delete All", style: UIBarButtonItemStyle.plain, target: self, action: #selector(deleteAllAction))
-        self.navigationItem.setRightBarButton(deleteAll, animated: true)
         
         let appDelegate = UIApplication.shared.delegate as? AppDelegate
         self.context = appDelegate?.persistentContainer.viewContext
@@ -115,7 +115,7 @@ class SaveCollectionViewController: UICollectionViewController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SaveCollectionViewCell", for: indexPath) as? SaveCollectionViewCell
         cell?.imageView.image = self.images[indexPath.row]
         cell?.layer.borderColor = UIColor.customColor().cgColor
-        cell?.layer.borderWidth = 1
+        cell?.layer.borderWidth = 2
         cell?.layer.cornerRadius = 5
         cell?.layer.masksToBounds = true
         

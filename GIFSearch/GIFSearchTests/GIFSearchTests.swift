@@ -88,6 +88,42 @@ class GIFSearchTests: XCTestCase {
             XCTAssertTrue(value != nil)
         }
     }
+    
+    // ViewModel
+    
+    func getDataForDetailTest () {
+        let url = "https://media3.giphy.com/media/l2JIm1br3jqUbKPVC/giphy-preview.gif?cid=e1bb72ff5b8e8b7e376b586e632e7777"
+       let test = self.viewModel?.getDataForDetail(url: url)
+        XCTAssertNil(test != nil)
+    }
+    
+    func wasRating () {
+        guard self.viewModel != nil else {return}
+        guard (self.viewModel?.arrayModel.count)! > 0 else { return }
+        if self.viewModel?.arrayModel[0].trending_datetime == "0000-00-00 00:00:00" {
+            let bool = self.viewModel?.wasReting(index: 0)
+            XCTAssertTrue(!bool!)
+        }
+    }
+    
+    func getSearchUrlTest() {
+        
+       // let const = "http://api.giphy.com/v1/gifs/search?q=Name&api_key=dc6zaTOxFJmzC"
+        let test = "http://api.giphy.com/v1/gifs/search?q=Test&api_key=dc6zaTOxFJmzC"
+        let text = "Test"
+        let serch = self.viewModel?.getSearchUrl(text: text)
+        XCTAssertTrue(serch == test)
+    }
+    
+    func getSearchUrlNilTest() {
+        
+        let text: String? = nil
+        let serch = self.viewModel?.getSearchUrl(text: text)
+        XCTAssertTrue(serch == "")
+    }
+    
+    
+    
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()

@@ -40,11 +40,11 @@ class MyDetailViewController: UIViewController {
     
     @objc func deleteAction() {
         
-        let fileManager = SFileManager()
+        let fileManager = MyFileManager()
         
         guard self.path != nil else {return}
-        fileManager.deletePath(path: self.path!)
-        self.delClouse!(self.path!)
+        fileManager.deletePath(self.path!)
+        self.delClouse?(self.path!)
         
         self.navigationController?.popViewController(animated: true)
         

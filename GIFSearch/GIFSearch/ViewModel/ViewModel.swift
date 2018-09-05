@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct ConstantUrl {
     static let trandigUrl = "http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC"
@@ -21,12 +22,15 @@ struct DetailData {
     let size: String
 }
 
+struct CreateImage {
+    let image: UIImage
+    let url: String
+}
+
 class ViewModel {
     
     var arrayPreviewUrl = [String]()
     var arrayModel = [Model]()
- 
-   // var urlName1: String = "http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC"
     var index : Int?
     
     func getDataOfModel (url: String,offset: Int, complition: @escaping ([String]) -> ()) {
@@ -58,12 +62,6 @@ class ViewModel {
         }
     }
     
-    func getHight(index: Int) -> Float {
-        let model = self.arrayModel[index]
-        guard let hight = Float(model.hight) else {return 150}
-        return hight
-    }
-    
     func wasReting(index:Int) -> Bool {
         guard self.arrayModel.count != 0 else {return false}
         var bool:Bool?
@@ -73,19 +71,6 @@ class ViewModel {
         }
         return bool ?? false
     }
-    
-    //    func getModel(urlName: String,complition: @escaping ([Model]) -> ()) {
-    //
-    //        let pasre = ParseJSON()
-    //        pasre.pasreWithUrl(urlName: urlName) { (arrayData) in
-    //            var tmpModel = [Model]()
-    //            for dict in arrayData {
-    //                let model = Model(dictinary: dict)
-    //                tmpModel.append(model)
-    //            }
-    //            complition((tmpModel))
-    //        }
-    //    }
     
     func getDataForDetail(url: String) -> DetailData? {
         var detail: DetailData?
@@ -99,27 +84,76 @@ class ViewModel {
         return detail ?? nil
     }
     
-    func search(urlName: String?,offSet: Int ,complition: @escaping ([String]) -> ()) {
-        self.getDataOfModel(url: urlName!, offset: offSet) { (urls) in
-            for model in self.arrayModel {
-                let newUrl = model.preview_url + "&rating=y"
-                model.preview_url = newUrl
-            }
-        } // http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC&rating=pg
-        complition(self.arrayPreviewUrl)
+    func createUIImage(complition: @escaping (UIImage,String) -> ()) {
+        let tempUrls = self.getTempArrayUrls()
+        self.resumeDownloadTask(urls: tempUrls, complition: { (data,url) in
+            guard let image = UIImage.gifImageWithData(data) else { return }
+            
+            complition(image,url)
+        })
     }
     
-    func getDataForSearch(urlName: String?,offSet: Int ,complition: @escaping ([String]) -> ()) {
-        self.getDataOfModel(url: urlName!, offset: offSet) { (urls) in
-            let filterModel = self.arrayModel.filter({ (model) -> Bool in
-                return model.rating == "y" || model.rating == "g" || model.rating == "pg"
-            })
-            self.arrayModel = filterModel
-            self.arrayPreviewUrl = []
-            for model in self.arrayModel {
-                self.arrayPreviewUrl.append(model.preview_url)
+    func getSearchUrl(text:String?) -> String {
+        guard text != nil else {return ""}
+        var search = text
+        if let newSearch = search?.components(separatedBy: " ") {
+            if newSearch.count == 2 {
+                search = newSearch[0] + newSearch[1]
             }
-            complition(self.arrayPreviewUrl)
+        }
+        let newSearchUrl = ConstantUrl.searchUrl.replacingOccurrences(of: "Name", with: search! )
+        return newSearchUrl
+    }
+    
+    func downloadRaitingImage(complition:@escaping (Data) -> ()) {
+        let downloadManager = DownLoadManager()
+        downloadManager.resumeDownloadPreviewGit(ConstantUrl.raitingUrl) { (data) in
+            guard data != nil else {return}
+            complition(data!)
         }
     }
+    
+    func getRatingImageView(index: Int, frameCell: CGRect, frameView: CGRect) -> UIImageView? {
+        var imageView: UIImageView?
+        if self.wasReting(index: index) {
+            let width = min(frameView.size.width / 12,
+                            frameView.size.height / 12)
+            let newFrame = CGRect(x: frameCell.origin.x + 5,
+                                  y: frameCell.origin.y + 5,
+                                  width: width,
+                                  height: width)
+            imageView = UIImageView(frame: newFrame)
+           imageView?.layer.cornerRadius = width / 2
+            imageView?.layer.masksToBounds = true
+        }
+        return imageView ?? nil
+    }
+    
+//    func createUIImageForSearch(complition: @escaping (UIImage,String) -> ()) {
+//        let tempUrls = self.getTempArrayUrls()
+//      //  self.alertEnter(count: tempUrls.count)
+//        self.resumeDownloadTask(urls: tempUrls, complition: { (data,url) in
+//            guard let image = UIImage.gifImageWithData(data) else { return }
+//
+//            complition(image,url)
+//        })
+//    }
+//    func alertEnter(vC: UICollectionViewController) {
+//
+//            let ac = UIAlertController(title: "It's all that was found", message: nil,
+//                                       preferredStyle: .alert)
+//            let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+//            ac.addAction(cancel)
+//            vC.present(ac, animated: true, completion: nil)
+//
+//    }
+//        func createUIImageForSearch() {
+//            guard let tempUrls = self.viewModel?.getTempArrayUrls() else { return }
+//            self.alertEnter(count: tempUrls.count)
+//            self.viewModel?.resumeDownloadTask(urls: tempUrls, complition: { (data,url) in
+//                guard let image = UIImage.gifImageWithData(data) else { return }
+//                self.arrayImages.append(image)
+//                self.urls.append(url)
+//            })
+//        }
 }

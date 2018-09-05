@@ -10,4 +10,7 @@
 
 @interface MyFileManager : NSObject
 
+- (NSString*) saveData:(NSData*)data title:(NSString*)title;
+- (void) deletePath:(NSString*)path;
+
 @end

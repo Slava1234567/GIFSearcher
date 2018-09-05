@@ -18,31 +18,27 @@ class DetailViewController: UIViewController {
     var detailData : DetailData?
     
     
-    
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        self.title = "Detail Gif"
-        
+    func addBarButtonItem() {
         let backButton = UIBarButtonItem(title: "< Back", style: UIBarButtonItemStyle.plain, target: self, action: #selector(clickBackButton))
         let saveButton = UIBarButtonItem(title: "Save", style: UIBarButtonItemStyle.plain, target: self, action: #selector(clickSaveButton))
         self.navigationItem.setLeftBarButton(backButton, animated: true)
         self.navigationItem.setRightBarButton(saveButton, animated: true)
-        
-        
-        self.titleImage.text = self.detailData?.title
-        self.date.text = self.detailData?.date
-        if let size =  Int((self.detailData?.size)!) {
-            let newSize = size / 1000
+    }
+    
+    func setDataOutlets(datailData:DetailData?) {
+        guard detailData != nil else {return}
+        self.titleImage.text = datailData!.title
+        self.date.text = datailData!.date
+        if let size =  Int(datailData!.size) {
+            let newSize = (size / 1000)
             self.size.text = String(newSize) + "kb"
         }
-        
         self.imageView.backgroundColor = UIColor.gray
         self.activityIndicator.startAnimating()
-        
-        guard self.detailData?.url != nil else {return}
-        
+    }
+    
+    func downloadImage(url: String?) {
+         guard url != nil else {return}
         let downloadManager = DownLoadManager()
         downloadManager.resumeDownloadPreviewGit((self.detailData?.url)!) { (data) in
             let image = UIImage.gifImageWithData(data!)
@@ -52,13 +48,24 @@ class DetailViewController: UIViewController {
         }
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.title = "Detail Gif"
+        
+        self.addBarButtonItem()
+        self.setDataOutlets(datailData: self.detailData)
+        self.downloadImage(url: self.detailData?.url)
+        
+    }
+    
     @objc func clickSaveButton() {
         
         guard self.imageView.image != nil else {return}
         let imageData = UIImagePNGRepresentation(self.imageView.image!)
         let title = self.detailData?.title
-        let file = SFileManager()
-        let path = file.saveData(data: imageData!, title: title!)
+        let file = MyFileManager()
+        let path = file.save(imageData!, title: title!)
         
         let saveVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SaveCollectionViewController") as? SaveCollectionViewController
         saveVC?.path = path

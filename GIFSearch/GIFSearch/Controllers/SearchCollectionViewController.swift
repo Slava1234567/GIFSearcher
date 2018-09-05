@@ -6,6 +6,7 @@
 //  Copyright © 2018 Viachaslau Shyla. All rights reserved.
 //
 
+
 import UIKit
 
 class SearchCollectionViewController: UICollectionViewController,UICollectionViewDelegateFlowLayout {
@@ -14,96 +15,51 @@ class SearchCollectionViewController: UICollectionViewController,UICollectionVie
     var searchName: String?
     var urls = [String]()
     var index = 0
+    
     var ratingImage: UIImage? {
         didSet {
-           self.collectionView?.reloadData()
+            self.collectionView?.reloadData()
         }
     }
-    
     var previewUrls = [String]() {
         didSet {
             self.index = self.previewUrls.count
-            self.createUIImage()
+            self.viewModel?.createUIImage(complition: { (image, url) in
+                self.arrayImages.append(image)
+                self.urls.append(url)
+            })
         }
     }
     var arrayImages = [UIImage]() {
         didSet {
-          self.collectionView?.backgroundColor = UIColor.black
+            self.collectionView?.backgroundColor = UIColor.black
             self.collectionView?.reloadData()
         }
     }
     
-    func createUIImage() {
-        guard let tempUrls = self.viewModel?.getTempArrayUrls() else { return }
-        self.alertEnter(count: tempUrls.count)
-        self.viewModel?.resumeDownloadTask(urls: tempUrls, complition: { (data,url) in
-            guard let image = UIImage.gifImageWithData(data) else { return }
-         
-            self.arrayImages.append(image)
-            self.urls.append(url)
-        })
-    }
-    
-    func alertEnter(count: Int) {
-        if count == 0 {
+    func alertEnter() {
+        if self.arrayImages.count == 0 {
             let ac = UIAlertController(title: "It's all that was found", message: nil,
                                        preferredStyle: .alert)
             let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
             ac.addAction(cancel)
-           self.present(ac, animated: true, completion: nil)
+            self.present(ac, animated: true, completion: nil)
         }
     }
-    
-    func downloadRaitingImage() {
-        let downloadManager = DownLoadManager()
-        downloadManager.resumeDownloadPreviewGit(ConstantUrl.raitingUrl) { (data) in
-            guard data != nil else {return}
-            self.ratingImage = UIImage.gifImageWithData(data!)
-        }
-    }
-    
-
-    func aa(index: Int, frame: CGRect) -> UIImageView? {
-        var imageView: UIImageView?
-        if (self.viewModel?.wasReting(index: index))! {
-           // let width = min(frame.size.width / 3, frame.size.height / 3)
-        let width = min(self.view.frame.size.width / 8,
-                        self.view.frame.size.height / 8)
-        let newFrame = CGRect(x: frame.origin.x + 5,
-                              y: frame.origin.y + 5,
-                              width: width,
-                              height: width)
-        imageView = UIImageView(frame: newFrame)
-            guard self.ratingImage != nil else {return nil}
-        imageView?.image = self.ratingImage
-        }
-        return imageView ?? nil
-    }
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        self.downloadRaitingImage()
-        
         self.viewModel = ViewModel()
-//        self.viewModel?.search(urlName: self.searchName!, offSet: index, complition: { (urls) in
-//            self.previewUrls = urls
-//            self.collectionView?.reloadData()
-//        })
-//
+        self.viewModel?.downloadRaitingImage(complition: { (data) in
+            self.ratingImage = UIImage.gifImageWithData(data)
+        })
         self.viewModel?.getDataOfModel(url: self.searchName!, offset: index, complition: { (urls) in
             self.previewUrls = urls
             self.collectionView?.reloadData()
         })
         let backButton = UIBarButtonItem(title: "< Back", style: UIBarButtonItemStyle.plain, target: self, action: #selector(clickBackButton))
         self.navigationItem.setLeftBarButton(backButton, animated: true)
-        
-      //  self.collectionView?.backgroundColor = UIColor.black
-        
-        
     }
     
     @objc func clickBackButton() {
@@ -113,7 +69,6 @@ class SearchCollectionViewController: UICollectionViewController,UICollectionVie
     // MARK: UICollectionViewDataSource
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
         return  self.previewUrls.count
     }
     
@@ -122,8 +77,10 @@ class SearchCollectionViewController: UICollectionViewController,UICollectionVie
         
         if arrayImages.count > indexPath.row {
             cell?.imageView.image = self.arrayImages[indexPath.row]
-            if let imageView = self.aa(index: indexPath.row,frame: (cell?.imageView.bounds)!) {
-            cell?.imageView.addSubview(imageView)
+            if let imageView = self.viewModel?.getRatingImageView(index: indexPath.row, frameCell: (cell?.imageView.bounds)!, frameView: self.view.frame) {
+                guard self.ratingImage != nil else {return cell!}
+                imageView.image = self.ratingImage
+                cell?.imageView.addSubview(imageView)
             }
             cell?.activityIndicator.stopAnimating()
             cell?.activityIndicator.hidesWhenStopped = true
@@ -159,3 +116,5 @@ class SearchCollectionViewController: UICollectionViewController,UICollectionVie
         return CGSize(width: widht, height: CGFloat(hight))
     }
 }
+
+
